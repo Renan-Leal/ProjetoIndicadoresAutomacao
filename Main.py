@@ -3,9 +3,10 @@ from ManipularDados import ManipularDados, CalcularIndicadores
 from OrganizarPastas import OrganizarPastas
 
 #Importando planilhas
-emails_df = pd.read_excel(r'C:\Users\Renan\Desktop\AutomacaoIndicadores\Bases de Dados\Emails.xlsx')
-lojas_df = pd.read_csv(r'C:\Users\Renan\Desktop\AutomacaoIndicadores\Bases de Dados\Lojas.csv', sep=';', encoding='latin1')
-vendas_df = pd.read_excel(r'C:\Users\Renan\Desktop\AutomacaoIndicadores\Bases de Dados\Vendas.xlsx')
+caminho_baseDados = r'C:\Users\Renan\Desktop\AutomacaoIndicadores\Bases de Dados'
+emails_df = pd.read_excel(rf'{caminho_baseDados}\Emails.xlsx')
+lojas_df = pd.read_csv(rf'{caminho_baseDados}\Lojas.csv', sep=';', encoding='latin1')
+vendas_df = pd.read_excel(rf'{caminho_baseDados}\Vendas.xlsx')
 
 #Definindo dia do indicador a ser calculado e criando 1 planilha para cada loja
 dia_indicador = ManipularDados().definir_dia_indicador(vendas_df)
