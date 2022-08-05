@@ -1,10 +1,7 @@
+from pathlib import Path
 class ManipularDados():
     def __init__(self):
         pass
-
-
-    def definir_dia_indicador(self, vendas_df):
-        return vendas_df['Data'].max()
 
 
     def separar_por_loja(self, lojas_df, vendas_df):
@@ -12,6 +9,16 @@ class ManipularDados():
         for loja in lojas_df['Loja']:
             dic_tabelas_lojas[loja] = vendas_df.loc[vendas_df['Loja']==loja, :]
         return dic_tabelas_lojas
+
+    def organizar_pastas(self, caminho_backup, dia_indicador, dic_tabelas_lojas):
+        caminho_backup = Path(caminho_backup)
+        arquivos = caminho_backup.iterdir()
+        lista_lojas = [arquivo.name for arquivo in arquivos]
+        for loja in dic_tabelas_lojas:
+            if loja not in lista_lojas:
+                Path(caminho_backup / f'{loja}').mkdir()
+                arquivo_nome = f'{dia_indicador.month}_{dia_indicador.day}_{loja}.xlsx'
+                dic_tabelas_lojas[loja].to_excel(Path(caminho_backup / loja / arquivo_nome))
 
 
 class CalcularIndicadores():
@@ -37,3 +44,6 @@ class CalcularIndicadores():
         valor_venda_ano = lojas_ano.groupby('Código Venda').sum()
         ticket_medio_ano = valor_venda_ano['Valor Final'].mean()
         return ticket_medio_dia, ticket_medio_ano
+
+
+
