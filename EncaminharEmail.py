@@ -1,19 +1,18 @@
-import pandas as pd
 #definindo metas para verificação das cores.
-meta_faturamento_dia = 1000
-meta_diversidadeProduto_dia = 4
-meta_ticketMedio_dia = 500
-meta_faturamento_ano = 1650000
-meta_diversidadeProduto_Ano = 120
-meta_ticketMedio_ano = 500
+import win32com.client as win32
 class VerificarCores:
 
     def __init__(self):
-        pass
+        self.meta_faturamento_dia = 1000
+        self.meta_diversidadeProduto_dia = 4
+        self.meta_ticketMedio_dia = 500
+        self.meta_faturamento_ano = 1650000
+        self.meta_diversidadeProduto_ano = 120
+        self.meta_ticketMedio_ano = 500
 
 
     def verificar_cor_faturamentoDia(self, faturamento_dia):
-        if faturamento_dia >= meta_faturamento_dia:
+        if faturamento_dia >= self.meta_faturamento_dia:
             cor_faturamento_dia = 'green'
         else:
             cor_faturamento_dia = 'red'
@@ -21,7 +20,7 @@ class VerificarCores:
 
 
     def verificar_cor_faturamentoAno(self, faturamento_ano):
-        if faturamento_ano >= meta_faturamento_ano:
+        if faturamento_ano >= self.meta_faturamento_ano:
             cor_faturamento_ano = 'green'
         else:
             cor_faturamento_ano = 'red'
@@ -29,7 +28,7 @@ class VerificarCores:
 
 
     def verificar_cor_diversidade_produtoDia(self, diversidade_produto_dia):
-        if diversidade_produto_dia >= meta_diversidadeProduto_dia:
+        if diversidade_produto_dia >= self.meta_diversidadeProduto_dia:
             cor_diversidade_produtoDia = 'green'
         else:
             cor_diversidade_produtoDia = 'red'
@@ -37,7 +36,7 @@ class VerificarCores:
 
 
     def verificar_cor_diversidade_produtoAno(self, diversidade_produto_ano):
-        if diversidade_produto_ano >= meta_diversidadeProduto_Ano:
+        if diversidade_produto_ano >= self.meta_diversidadeProduto_ano:
             cor_diversidade_produtoAno = 'green'
         else:
             cor_diversidade_produtoAno = 'red'
@@ -45,7 +44,7 @@ class VerificarCores:
 
 
     def verificar_cor_ticketMedioDia(self, ticket_medio_dia):
-        if ticket_medio_dia >= meta_ticketMedio_dia:
+        if ticket_medio_dia >= self.meta_ticketMedio_dia:
             cor_ticketMedio_dia = 'green'
         else:
             cor_ticketMedio_dia = 'red'
@@ -53,22 +52,32 @@ class VerificarCores:
 
 
     def verificar_cor_ticketMedioAno(self, ticket_medio_ano):
-        if ticket_medio_ano >= meta_ticketMedio_ano:
+        if ticket_medio_ano >= self.meta_ticketMedio_ano:
             cor_ticketMedio_ano = 'green'
         else:
             cor_ticketMedio_ano = 'red'
         return cor_ticketMedio_ano
 
 class CriarEmail():
-    def __init__(self):
-        pass
 
-    def criar_emailHTML_gerentes(self, loja, nome, dia_indicador, faturamento_dia, faturamento_ano, ticket_medio_dia,
+    def __init__(self, loja, nome, dia_indicador, faturamento_dia, faturamento_ano, ticket_medio_dia,
                                  ticket_medio_ano, diversidade_produto_dia, diversidade_produto_ano):
-        email_text = f'''
-        <p>Bom dia, {nome}.</p>
+        self.loja = loja
+        self.nome = nome
+        self.dia_indicador = dia_indicador
+        self.faturamento_dia = faturamento_dia
+        self.faturamento_ano = faturamento_ano
+        self.ticket_medio_dia = ticket_medio_dia
+        self.ticket_medio_ano = ticket_medio_ano
+        self.diversidade_produto_dia = diversidade_produto_dia
+        self.diversidade_produto_ano = diversidade_produto_ano
 
-        <p>O resultado de ontem: <strong>({dia_indicador.day}/{dia_indicador.month})</strong> da <strong>loja {loja} </strong> foi:</p>
+
+    def criar_email_gerencia(self):
+        email_text = f'''
+        <p>Bom dia, {self.nome}.</p>
+
+        <p>O resultado de ontem: <strong>({self.dia_indicador.day}/{self.dia_indicador.month})</strong> da <strong>loja {self.loja} </strong> foi:</p>
           ''' + '''
         <!DOCTYPE html>
         <html>
@@ -107,21 +116,21 @@ class CriarEmail():
         </tr>
         <tr>
           <td style="text-align: center">Faturamento</td>
-          <td style="text-align: center">R${faturamento_dia:.2f}</td>
-          <td style="text-align: center">R${meta_faturamento_dia:.2f}</td>
-          <td style="text-align: center"><font color="{VerificarCores().verificar_cor_faturamentoDia(faturamento_dia)}">◙</font></td>
+          <td style="text-align: center">R${self.faturamento_dia:.2f}</td>
+          <td style="text-align: center">R${VerificarCores().meta_faturamento_dia:.2f}</td>
+          <td style="text-align: center"><font color="{VerificarCores().verificar_cor_faturamentoDia(self.faturamento_dia)}">◙</font></td>
         </tr>
         <tr>
           <td style="text-align: center">Diversidade de Produto</td>
-          <td style="text-align: center">{diversidade_produto_dia}</td>
-          <td style="text-align: center">{meta_diversidadeProduto_dia}</td>
-          <td style="text-align: center"><font color="{VerificarCores().verificar_cor_diversidade_produtoDia(diversidade_produto_dia)}">◙</font></td>
+          <td style="text-align: center">{self.diversidade_produto_dia}</td>
+          <td style="text-align: center">{VerificarCores().meta_diversidadeProduto_dia}</td>
+          <td style="text-align: center"><font color="{VerificarCores().verificar_cor_diversidade_produtoDia(self.diversidade_produto_dia)}">◙</font></td>
         </tr>
         <tr>
           <td style="text-align: center">Ticket Médio</td>
-          <td style="text-align: center">R${ticket_medio_dia:.2f}</td>
-          <td style="text-align: center">R${meta_ticketMedio_dia:.2f}</td>
-          <td style="text-align: center"><font color="{VerificarCores().verificar_cor_ticketMedioDia(ticket_medio_dia)}">◙</font></td>
+          <td style="text-align: center">R${self.ticket_medio_dia:.2f}</td>
+          <td style="text-align: center">R${VerificarCores().meta_ticketMedio_dia:.2f}</td>
+          <td style="text-align: center"><font color="{VerificarCores().verificar_cor_ticketMedioDia(self.ticket_medio_dia)}">◙</font></td>
         </tr>
         </table>
         <p></p>
@@ -136,21 +145,21 @@ class CriarEmail():
         </tr>
         <tr>
           <td style="text-align: center">Faturamento</td>
-          <td style="text-align: center">R${faturamento_ano:.2f}</td>
-          <td style="text-align: center">R${meta_faturamento_ano:.2f}</td>
-          <td style="text-align: center"><font color="{VerificarCores().verificar_cor_faturamentoAno(faturamento_ano)}">◙</font></td>
+          <td style="text-align: center">R${self.faturamento_ano:.2f}</td>
+          <td style="text-align: center">R${VerificarCores().meta_faturamento_ano:.2f}</td>
+          <td style="text-align: center"><font color="{VerificarCores().verificar_cor_faturamentoAno(self.faturamento_ano)}">◙</font></td>
         </tr>
         <tr>
           <td style="text-align: center">Diversidade de Produto</td>
-          <td style="text-align: center">{diversidade_produto_ano}</td>
-          <td style="text-align: center">{meta_diversidadeProduto_Ano}</td>
-          <td style="text-align: center"><font color="{VerificarCores().verificar_cor_diversidade_produtoAno(diversidade_produto_ano)}">◙</font></td>
+          <td style="text-align: center">{self.diversidade_produto_ano}</td>
+          <td style="text-align: center">{VerificarCores().meta_diversidadeProduto_ano}</td>
+          <td style="text-align: center"><font color="{VerificarCores().verificar_cor_diversidade_produtoAno(self.diversidade_produto_ano)}">◙</font></td>
         </tr>
         <tr>
           <td style="text-align: center">Ticket Médio</td>
-          <td style="text-align: center">R${ticket_medio_ano:.2f}</td>
-          <td style="text-align: center">R${meta_ticketMedio_ano:.2f}</td>
-          <td style="text-align: center"><font color="{VerificarCores().verificar_cor_ticketMedioAno(ticket_medio_ano)}">◙</font></td>
+          <td style="text-align: center">R${self.ticket_medio_ano:.2f}</td>
+          <td style="text-align: center">R${VerificarCores().meta_ticketMedio_ano:.2f}</td>
+          <td style="text-align: center"><font color="{VerificarCores().verificar_cor_ticketMedioAno(self.ticket_medio_ano)}">◙</font></td>
         </tr>
         </table>
       </table>
@@ -169,6 +178,17 @@ class CriarEmail():
       <p>Att. Renan D.Leal</p>
       '''
         return email_text
+
+    def encaminhar_email_gerencia(self, emails_df, caminho_backup):
+        outlook = win32.Dispatch('outlook.application')
+        mail = outlook.CreateItem(0)
+        mail.To = emails_df.loc[emails_df['Loja'] == self.loja, 'E-mail'].values[0]
+        mail.Subject = f'OnePage Day {self.dia_indicador.day}/{self.dia_indicador.month} - {self.loja} Store'
+        mail.HTMLBody = self.criar_email_gerencia()
+        attachment = rf'{caminho_backup}\{self.loja}\{self.dia_indicador.month}_{self.dia_indicador.day}_{self.loja}.xlsx'
+        mail.Attachments.Add(attachment)
+        mail.Send()
+
 
 
 
