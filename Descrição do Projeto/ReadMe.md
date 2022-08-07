@@ -1,5 +1,5 @@
 <h1 align="center">Automação de Indicadores</h1>
-<p><h2>Objetivo:</h2> criar um processo da forma mais automática possível para calcular o OnePage de cada loja e enviar um email para o gerente de cada loja com o seu OnePage no corpo do e-mail e também o arquivo completo com os dados da sua respectiva loja em anexo.</p>
+<p><h2>Objetivo:</h2> Criar um processo da forma mais automática possível para calcular o OnePage de cada loja e enviar um email para cada gerente com o seu OnePage no corpo do e-mail e também o arquivo completo com os dados da sua respectiva loja em anexo.</p>
 <p></p>
 <h2>Descrição:</h2>
 <table width="200px" border="1">
