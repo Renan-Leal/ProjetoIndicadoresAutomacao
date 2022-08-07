@@ -1,8 +1,15 @@
+import pathlib
+
+
 def separar_por_loja(lojas_df, vendas_df):
     dic_tabelas_lojas = {}
     for loja in lojas_df['Loja']:
         dic_tabelas_lojas[loja] = vendas_df.loc[vendas_df['Loja'] == loja, :]
     return dic_tabelas_lojas
+
+
+def criar_pasta_backup_lojas():
+    pathlib.Path('C:/Users/Renan/Desktop/AutomacaoIndicadores/Backup Arquivos Lojas').mkdir(exist_ok=True)
 
 
 def organizar_pastas(caminho_backup, dia_indicador, dic_tabelas_lojas):

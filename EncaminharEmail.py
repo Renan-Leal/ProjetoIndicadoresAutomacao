@@ -1,5 +1,8 @@
 #definindo metas para verificação das cores.
 import win32com.client as win32
+
+
+
 class VerificarCores:
 
     def __init__(self):
@@ -57,6 +60,7 @@ class VerificarCores:
         else:
             cor_ticketMedio_ano = 'red'
         return cor_ticketMedio_ano
+
 
 class CriarEmail():
 
@@ -179,29 +183,43 @@ class CriarEmail():
       '''
         return email_text
 
+
     def encaminhar_email_gerencia(self, emails_df, caminho_backup):
         outlook = win32.Dispatch('outlook.application')
         mail = outlook.CreateItem(0)
         mail.To = emails_df.loc[emails_df['Loja'] == self.loja, 'E-mail'].values[0]
-        mail.Subject = f'OnePage Day {self.dia_indicador.day}/{self.dia_indicador.month} - {self.loja} Store'
+        mail.Subject = f'OnePage Day {self.dia_indicador.day}/{self.dia_indicador.month} - Loja {self.loja}'
         mail.HTMLBody = self.criar_email_gerencia()
         attachment = rf'{caminho_backup}\{self.loja}\{self.dia_indicador.month}_{self.dia_indicador.day}_{self.loja}.xlsx'
         mail.Attachments.Add(attachment)
         mail.Send()
 
 
+    def criar_email_diretoria(self, ranking_faturamento_lojasDia, ranking_faturamento_lojasAno):
+        email_text=f'''
+        Bom dia,
+        Segue em anexo o ranking do faturamento anual e Diário de todas as lojas.
+        
+        Melhor loja do dia {ranking_faturamento_lojasDia.index[0]} - Faturamento: R${ranking_faturamento_lojasDia.iloc[0,0]:.2f}
+        Pior loja do dia {ranking_faturamento_lojasDia.index[-1]} - Faturamento: R${ranking_faturamento_lojasDia.iloc[-1,-1]:.2f}
+        
+        Melhor loja do ano {ranking_faturamento_lojasAno.index[0]} - Faturamento: R${ranking_faturamento_lojasAno.iloc[0,0]:.2f}
+        Pior loja do ano {ranking_faturamento_lojasAno.index[-1]} - Faturamento: R${ranking_faturamento_lojasAno.iloc[-1,-1]:.2f}
+        
+        Qualquer dúvida, estou a disposição.
+        Att. Renan D. Leal
+        '''
+        return email_text
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+    def encaminhar_email_diretoria(self, emails_df, email_diretoria,  caminho_ranking_dia, caminho_ranking_ano):
+        outlook = win32.Dispatch('outlook.application')
+        mail = outlook.CreateItem(0)
+        mail.To = emails_df.loc[emails_df['Loja'] == 'Diretoria', 'E-mail'].values[0]
+        mail.Subject = f'Ranking diário e Anual ({self.dia_indicador.month}/{self.dia_indicador.day}).'
+        mail.Body = email_diretoria
+        attachment = caminho_ranking_dia
+        mail.Attachments.Add(attachment)
+        attachment = caminho_ranking_ano
+        mail.Attachments.Add(attachment)
+        mail.Send()
