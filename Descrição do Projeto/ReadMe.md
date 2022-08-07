@@ -1,5 +1,6 @@
 <h1 align="center">Automação de Indicadores</h1>
-<p><h2>Objetivo:</h2> Criar um processo da forma mais automática possível para calcular o OnePage de cada loja e enviar um email para cada gerente com o seu OnePage no corpo do e-mail e também o arquivo completo com os dados da sua respectiva loja em anexo.</p>
+<p><h2>Objetivo:</h2> Utilizando Python, o objetivo foi criar um processo da forma mais automática possível para calcular o OnePage de cada loja e enviar um email formatado em HTML exibindo os indicadores calculados para cada gerente. O arquivo completo com os dados da loja também é anexado.
+Ao final da rotina, um e-mail com o ranking do faturamento anual e diário é encaminhado para a diretoria.</p>
 <p></p>
 <h2>Descrição:</h2>
 <table width="200px" border="1">
