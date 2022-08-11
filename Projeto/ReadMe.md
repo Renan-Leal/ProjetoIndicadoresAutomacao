@@ -10,7 +10,7 @@
 <ul>
   <li><p><b><u>/indicadores/lojas</u></b> - Exibe todas as lojas com todos os indicadores(Faturamento Diário, Faturamento Anual, Ticket Médio Diário, Ticket Médio Anual, Diversidade de Produto Diária, Diversidade de Produto Anual).</p></li>
 
-  <li><p><b><u>indicadores/lojas/faturamento/diario</u>/</b> - Exibe as lojas e o Faturamento Diário de cada uma.</p></li>
+  <li><p><u><b>indicadores/lojas/faturamento/diario</u>/</b> - Exibe as lojas e o Faturamento Diário de cada uma.</p></li>
 
   <li><p><b><u>/indicadores/lojas/faturamento/anual</u></b> -  Exibe as lojas e o Faturamento Anual de cada uma.</p></li>
 
