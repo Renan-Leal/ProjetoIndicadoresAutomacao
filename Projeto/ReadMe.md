@@ -1,8 +1,8 @@
 <h1 style="text-align: center">Explicação API:</h1>
 
-<p>Para o time da empresa, cria-se uma API para consumo dos indicadores.</p>
+<p>Para o time da empresa, cria-se uma API para consumo dos indicadores calculados.</p>
 
-<p>A API disponibiliza os dados seguinte maneira:</p> 
+<h2>A API disponibiliza os dados seguinte maneira:</h2> 
 <p>"Nome Loja": [Faturamento Diário, Faturamento Anual, Ticket Médio Diário, Ticket Médio Anual, Diversidade de Produto Diária, Diversidade de Produto Anual].</p> 
 
 O usuário poderá navegar pelas seguintes URL:
