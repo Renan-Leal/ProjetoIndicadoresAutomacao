@@ -23,6 +23,7 @@ caminho_backup = r'C:\Users\Renan\Desktop\AutomacaoIndicadores\Backup Arquivos L
 organizar_pastas(caminho_backup,dia_indicador, dic_tabelas_lojas)
 
 #percorrendo todas as lojas
+indicadores_lojas = {}
 for loja in dic_tabelas_lojas:
     lojas_ano = dic_tabelas_lojas[loja]
     lojas_dia = lojas_ano.loc[lojas_ano['Data']==lojas_ano['Data'].max(), :]
@@ -33,11 +34,16 @@ for loja in dic_tabelas_lojas:
     diversidade_produto_dia, diversidade_produto_ano = manipular_dados.calcular_diversidade_produto_diaAno()
     ticket_medio_dia, ticket_medio_ano = manipular_dados.calcular_ticketMedio_diaAno()
 
+    #Criando dicionário para fazer API de consumo
+    indicadores_lojas[loja] = faturamento_dia, faturamento_ano, ticket_medio_dia, ticket_medio_ano, \
+                              diversidade_produto_dia, diversidade_produto_ano
+
     #Construção do e-mail para os gerentes
     nome = emails_df.loc[emails_df['Loja'] == loja, 'Gerente'].values[0]
     criar_email = CriarEmail(loja,nome,dia_indicador, faturamento_dia,faturamento_ano,ticket_medio_dia, ticket_medio_ano,
                              diversidade_produto_dia,diversidade_produto_ano)
     criar_email.encaminhar_email_gerencia(emails_df,caminho_backup)
+
 
     time.sleep(3)
 

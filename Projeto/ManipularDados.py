@@ -9,7 +9,7 @@ class ManipularDados():
         faturamento_dia = self.lojas_dia['Valor Final'].sum()
         faturamento_ano = self.lojas_ano['Valor Final'].sum()
 
-        return faturamento_dia, faturamento_ano
+        return float(faturamento_dia), float(faturamento_ano)
 
 
     def calcular_diversidade_produto_diaAno(self):

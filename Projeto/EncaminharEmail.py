@@ -89,18 +89,18 @@ class CriarEmail():
         <style>
         table {
            font-family: arial, sans-serif;
-           border-collapse: collapse;
+           border-collapse: 1px solid black;
            width: 100%;
         }
     
         td, th {
-           border: 1px solid #dddddd;
+           border: 1px solid #c8c8c8;
            text-align: left;
            padding: 8px;
         }
     
          tr:nth-child(even) {
-            background-color: #dddddd;
+            background-color: #aee3e6;
          }
       
       </style>
@@ -108,7 +108,7 @@ class CriarEmail():
       <body>
       ''' + f'''
       
-      <h2>Indicadores de Performance</h2>
+      <h2 style="text-align: center">Indicadores de Performance</h2>
     
       <table>
         <table>
