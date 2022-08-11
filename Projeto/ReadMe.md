@@ -26,4 +26,4 @@
   <b>Exemplo:</b> /indicadores/lojas/Iguatemi Esplanada</p></li>
 
 
-  <li><p><b>/indicadores/lojas/faturamento/total</b> - Exibe o Faturamento Total da empresa, ou seja, soma do Faturamento Anual de todas as lojas.</p></li
+  <li><p><b>/indicadores/lojas/faturamento/total</b> - Exibe o Faturamento Total da empresa, ou seja, soma do Faturamento Anual de todas as lojas.</p></li>
