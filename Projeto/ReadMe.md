@@ -22,7 +22,7 @@
 
   <li><p><b>/indicadores/lojas/diversidadeProduto/anual</b> - Exibe as lojas e a Diversidade de Produto Anual de cada uma.</p></li>
 
-  <li><p><b>/indicadores/lojas/<Pesquisar Loja></b> -  Exibe a loja pesquisada e todos os seus indicadores.
+  <li><p><b>/indicadores/lojas/<Pesquisar Loja></b> -  Exibe a loja pesquisada e todos os seus indicadores.<p>
   <b>Exemplo:</b> /indicadores/lojas/Iguatemi Esplanada</p></li>
 
 
