@@ -27,7 +27,7 @@ Ao final da rotina, um e-mail com o ranking do faturamento anual e diário é en
 <ul>
   <li><b>Passo 1</b> - Instale e importe as bibliotecas listadas acima.</li>
   <li><b>Passo 2</b> - Faça o Download das bases de dados que estão na pasta Base de Dados.</li>
-  <li><b>Passo 3</b> - Altere os caminhos que estão nas variáveis <b>caminho_baseDados</b> e <b>caminho_backup</b> adaptando para os caminhos do seu computador. Para auxiliar nesse processo, as variáveis estarão sinalizadas com um comentário escrito <b>Me altere!!!</b> ao lado direito.</li>
+  <li><b>Passo 3</b> - Altere os caminhos que estão nas variáveis <b>caminho_baseDados</b> e <b>caminho_backup</b> adaptando para os caminhos do seu computador. Para auxiliar nesse processo, as variáveis estarão sinalizadas com um comentário escrito <b>Me altere!!!</b> ao lado direito. Ambas variáveis podem ser encontradas no <b>início</b> do <b>arquivo Main</b>.</li>
   <li><b>Passo 4</b> - Garanta que você já autenticou no outlook do seu computador ao menos uma vez.</li>
   <li><b>Passo 4</b> - Be Happy!</li>
 </ul>
