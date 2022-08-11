@@ -2,10 +2,10 @@
 
 <p>Para o time da empresa, cria-se uma API para consumo dos indicadores calculados.</p>
 
-<h2>A API disponibiliza os dados seguinte maneira:</h2> 
+<h2>Como a API disponibiliza os dados:</h2> 
 <p>"Nome Loja": [Faturamento Diário, Faturamento Anual, Ticket Médio Diário, Ticket Médio Anual, Diversidade de Produto Diária, Diversidade de Produto Anual].</p> 
 
-O usuário poderá navegar pelas seguintes URL:
+<h3>O usuário poderá navegar pelas seguintes URL:</h3>
 
 <p>/indicadores/lojas - Exibe todas as lojas com todos os indicadores(Faturamento Diário, Faturamento Anual, Ticket Médio Diário, Ticket Médio Anual, Diversidade de Produto Diária, Diversidade de Produto Anual).</p>
 
