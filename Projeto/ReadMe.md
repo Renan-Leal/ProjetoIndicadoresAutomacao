@@ -1,6 +1,6 @@
-<h1 style="text-align: center">Explicação API:</h1>
+<h1 style="text-align: center">Objetivo:</h1>
 
-<p>Para o time da empresa, cria-se uma API para consumo dos indicadores calculados.</p>
+<p>Criar uma API para consumo dos indicadores calculados de cada loja.</p>
 
 <h2>Como a API disponibiliza os dados:</h2> 
 <p>"Nome Loja": [Faturamento Diário, Faturamento Anual, Ticket Médio Diário, Ticket Médio Anual, Diversidade de Produto Diária, Diversidade de Produto Anual].</p> 
