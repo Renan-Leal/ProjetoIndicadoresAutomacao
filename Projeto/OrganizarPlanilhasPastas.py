@@ -8,8 +8,8 @@ def separar_por_loja(lojas_df, vendas_df):
     return dic_tabelas_lojas
 
 
-def criar_pasta_backup_lojas():
-    pathlib.Path('C:/Users/Renan/Desktop/AutomacaoIndicadores/Backup Arquivos Lojas').mkdir(exist_ok=True)
+def criar_pasta_backup_lojas(caminho_backup):
+    pathlib.Path(caminho_backup).mkdir(exist_ok=True)
 
 
 def organizar_pastas(caminho_backup, dia_indicador, dic_tabelas_lojas):

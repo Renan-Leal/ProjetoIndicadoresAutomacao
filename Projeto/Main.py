@@ -7,7 +7,7 @@ from EncaminharEmail import CriarEmail
 
 
 #Importando planilhas
-caminho_baseDados = r'C:\Users\Renan\Desktop\AutomacaoIndicadores\Bases de Dados'
+caminho_baseDados = r'C:\Users\Renan\Desktop\AutomacaoIndicadores\Bases de Dados' #Me altere!!!
 emails_df = pd.read_excel(rf'{caminho_baseDados}\Emails.xlsx')
 lojas_df = pd.read_csv(rf'{caminho_baseDados}\Lojas.csv', sep=';', encoding='latin1')
 vendas_df = pd.read_excel(rf'{caminho_baseDados}\Vendas.xlsx')
@@ -18,8 +18,8 @@ vendas_df = vendas_df.merge(lojas_df, on='ID Loja')
 dic_tabelas_lojas = separar_por_loja(lojas_df, vendas_df)
 
 #Criando pastas das lojas e colocando a planilha de cada loja em sua respectiva pasta
-criar_pasta_backup_lojas()
-caminho_backup = r'C:\Users\Renan\Desktop\AutomacaoIndicadores\Backup Arquivos Lojas'
+caminho_backup = r'C:\Users\Renan\Desktop\AutomacaoIndicadores\Backup Arquivos Lojas' #Me altere!!!
+criar_pasta_backup_lojas(caminho_backup)
 organizar_pastas(caminho_backup,dia_indicador, dic_tabelas_lojas)
 
 #percorrendo todas as lojas
@@ -49,11 +49,12 @@ for loja in dic_tabelas_lojas:
 
 #Criando rankings e salvando como arquivos excel
 ranking_faturamento_lojasDia, ranking_faturamento_lojasAno = manipular_dados.criar_rankingLojas_diaAno(vendas_df)
-caminho_ranking_dia = fr'{caminho_backup}\Ranking_Diário{dia_indicador.month}_{dia_indicador.day}.xlsx'
-caminho_ranking_ano = fr'{caminho_backup}\Ranking_Anual{dia_indicador.month}_{dia_indicador.day}.xlsx'
+caminho_ranking_dia = fr'{caminho_backup}\Ranking_Diário_{dia_indicador.month}_{dia_indicador.day}.xlsx'
+caminho_ranking_ano = fr'{caminho_backup}\Ranking_Anual_{dia_indicador.month}_{dia_indicador.day}.xlsx'
 
 #Salvar os rankings na pasta de Backup
 manipular_dados.criar_excel(ranking_faturamento_lojasDia, ranking_faturamento_lojasAno, caminho_ranking_dia, caminho_ranking_ano)
+
 time.sleep(0.5)
 
 #Criando e encaminhando e-mail para a diretoria
