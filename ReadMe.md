@@ -15,10 +15,10 @@ O processo organizará uma pasta de Backup para todas as lojas alocando cada arq
 
 <h2>Bibliotecas Utilizadas</h2>
 <ul>
-<li>Pandas - Para tratamento de dados e cálculo dos indicadores.</li>
-<li>Pathlib - Para organização das pastas para backup.</li>
-<li>Pywin32 - Para conexão com outlook.</li>
-<li>Flask - Para criação da API de consumo dos indicadores.</li>
+<li><b>Pandas</b> - Para tratamento de dados e cálculo dos indicadores.</li>
+<li><b>Pathlib</b> - Para organização das pastas para backup.</li>
+<li><b>Pywin32</b> - Para conexão com outlook.</li>
+<li><b>Flask</b> - Para criação da API de consumo dos indicadores.</li>
 </ul>
 
 
