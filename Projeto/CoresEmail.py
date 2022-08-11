@@ -62,26 +62,18 @@ class VerificarCores:
         return cor_ticketMedio_ano
 
 
-class CriarEmail():
+class CriarEncaminharEmail():
 
-    def __init__(self, loja, nome, dia_indicador, faturamento_dia, faturamento_ano, ticket_medio_dia,
-                                 ticket_medio_ano, diversidade_produto_dia, diversidade_produto_ano):
-        self.loja = loja
-        self.nome = nome
+    def __init__(self, dia_indicador):
         self.dia_indicador = dia_indicador
-        self.faturamento_dia = faturamento_dia
-        self.faturamento_ano = faturamento_ano
-        self.ticket_medio_dia = ticket_medio_dia
-        self.ticket_medio_ano = ticket_medio_ano
-        self.diversidade_produto_dia = diversidade_produto_dia
-        self.diversidade_produto_ano = diversidade_produto_ano
 
 
-    def criar_email_gerencia(self):
+    def criar_email_gerencia(self, loja, nome, faturamento_dia, faturamento_ano, ticket_medio_dia,
+                                 ticket_medio_ano, diversidade_produto_dia, diversidade_produto_ano):
         email_text = f'''
-        <p>Bom dia, {self.nome}.</p>
+        <p>Bom dia, {nome}.</p>
 
-        <p>O resultado de ontem: <strong>({self.dia_indicador.day}/{self.dia_indicador.month})</strong> da <strong>loja {self.loja} </strong> foi:</p>
+        <p>O resultado de ontem: <strong>({self.dia_indicador.day}/{self.dia_indicador.month})</strong> da <strong>loja {loja} </strong> foi:</p>
           ''' + '''
         <!DOCTYPE html>
         <html>
@@ -120,21 +112,21 @@ class CriarEmail():
         </tr>
         <tr>
           <td style="text-align: center">Faturamento</td>
-          <td style="text-align: center">R${self.faturamento_dia:.2f}</td>
+          <td style="text-align: center">R${faturamento_dia:.2f}</td>
           <td style="text-align: center">R${VerificarCores().meta_faturamento_dia:.2f}</td>
-          <td style="text-align: center"><font color="{VerificarCores().verificar_cor_faturamentoDia(self.faturamento_dia)}">◙</font></td>
+          <td style="text-align: center"><font color="{VerificarCores().verificar_cor_faturamentoDia(faturamento_dia)}">◙</font></td>
         </tr>
         <tr>
           <td style="text-align: center">Diversidade de Produto</td>
-          <td style="text-align: center">{self.diversidade_produto_dia}</td>
+          <td style="text-align: center">{diversidade_produto_dia}</td>
           <td style="text-align: center">{VerificarCores().meta_diversidadeProduto_dia}</td>
-          <td style="text-align: center"><font color="{VerificarCores().verificar_cor_diversidade_produtoDia(self.diversidade_produto_dia)}">◙</font></td>
+          <td style="text-align: center"><font color="{VerificarCores().verificar_cor_diversidade_produtoDia(diversidade_produto_dia)}">◙</font></td>
         </tr>
         <tr>
           <td style="text-align: center">Ticket Médio</td>
-          <td style="text-align: center">R${self.ticket_medio_dia:.2f}</td>
+          <td style="text-align: center">R${ticket_medio_dia:.2f}</td>
           <td style="text-align: center">R${VerificarCores().meta_ticketMedio_dia:.2f}</td>
-          <td style="text-align: center"><font color="{VerificarCores().verificar_cor_ticketMedioDia(self.ticket_medio_dia)}">◙</font></td>
+          <td style="text-align: center"><font color="{VerificarCores().verificar_cor_ticketMedioDia(ticket_medio_dia)}">◙</font></td>
         </tr>
         </table>
         <p></p>
@@ -149,21 +141,21 @@ class CriarEmail():
         </tr>
         <tr>
           <td style="text-align: center">Faturamento</td>
-          <td style="text-align: center">R${self.faturamento_ano:.2f}</td>
+          <td style="text-align: center">R${faturamento_ano:.2f}</td>
           <td style="text-align: center">R${VerificarCores().meta_faturamento_ano:.2f}</td>
-          <td style="text-align: center"><font color="{VerificarCores().verificar_cor_faturamentoAno(self.faturamento_ano)}">◙</font></td>
+          <td style="text-align: center"><font color="{VerificarCores().verificar_cor_faturamentoAno(faturamento_ano)}">◙</font></td>
         </tr>
         <tr>
           <td style="text-align: center">Diversidade de Produto</td>
-          <td style="text-align: center">{self.diversidade_produto_ano}</td>
+          <td style="text-align: center">{diversidade_produto_ano}</td>
           <td style="text-align: center">{VerificarCores().meta_diversidadeProduto_ano}</td>
-          <td style="text-align: center"><font color="{VerificarCores().verificar_cor_diversidade_produtoAno(self.diversidade_produto_ano)}">◙</font></td>
+          <td style="text-align: center"><font color="{VerificarCores().verificar_cor_diversidade_produtoAno(diversidade_produto_ano)}">◙</font></td>
         </tr>
         <tr>
           <td style="text-align: center">Ticket Médio</td>
-          <td style="text-align: center">R${self.ticket_medio_ano:.2f}</td>
+          <td style="text-align: center">R${ticket_medio_ano:.2f}</td>
           <td style="text-align: center">R${VerificarCores().meta_ticketMedio_ano:.2f}</td>
-          <td style="text-align: center"><font color="{VerificarCores().verificar_cor_ticketMedioAno(self.ticket_medio_ano)}">◙</font></td>
+          <td style="text-align: center"><font color="{VerificarCores().verificar_cor_ticketMedioAno(ticket_medio_ano)}">◙</font></td>
         </tr>
         </table>
       </table>
@@ -184,13 +176,13 @@ class CriarEmail():
         return email_text
 
 
-    def encaminhar_email_gerencia(self, emails_df, caminho_backup):
+    def encaminhar_email_gerencia(self, emails_df, caminho_backup, loja, email_gerencia):
         outlook = win32.Dispatch('outlook.application')
         mail = outlook.CreateItem(0)
-        mail.To = emails_df.loc[emails_df['Loja'] == self.loja, 'E-mail'].values[0]
-        mail.Subject = f'OnePage Day {self.dia_indicador.day}/{self.dia_indicador.month} - Loja {self.loja}'
-        mail.HTMLBody = self.criar_email_gerencia()
-        attachment = rf'{caminho_backup}\{self.loja}\{self.dia_indicador.month}_{self.dia_indicador.day}_{self.loja}.xlsx'
+        mail.To = emails_df.loc[emails_df['Loja'] == loja, 'E-mail'].values[0]
+        mail.Subject = f'OnePage Day {self.dia_indicador.day}/{self.dia_indicador.month} - Loja {loja}'
+        mail.HTMLBody = email_gerencia
+        attachment = rf'{caminho_backup}\{loja}\{self.dia_indicador.month}_{self.dia_indicador.day}_{loja}.xlsx'
         mail.Attachments.Add(attachment)
         mail.Send()
 
@@ -198,7 +190,7 @@ class CriarEmail():
     def criar_email_diretoria(self, ranking_faturamento_lojasDia, ranking_faturamento_lojasAno):
         email_text=f'''
         Bom dia,
-        Segue em anexo o ranking do faturamento anual e Diário de todas as lojas.
+        Segue em anexo o ranking do faturamento Anual e Diário de todas as lojas.
         
         Melhor loja do dia {ranking_faturamento_lojasDia.index[0]} - Faturamento: R${ranking_faturamento_lojasDia.iloc[0,0]:.2f}
         Pior loja do dia {ranking_faturamento_lojasDia.index[-1]} - Faturamento: R${ranking_faturamento_lojasDia.iloc[-1,-1]:.2f}
